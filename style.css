@@ -1,7 +1,25 @@
+#calculator {
+    background-color: rosybrown;
+}
+    
+#display {
+    width: 40%;
+    height: 20%;
+    padding: 20px;
+    margin: auto;
+    
+}
+
 button {
     background-color: rgb(87, 84, 84);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 70px;
-
+    font-size: 30px;
+    border-radius: 60px;
+    padding: 20px 40px;
+    margin: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
 
 }

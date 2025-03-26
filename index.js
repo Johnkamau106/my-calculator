@@ -1,4 +1,20 @@
 let history = [];
+
+const exchangeRates = {
+    "USD": {
+        "EUR": 0.85,
+        "GBP": 0.75
+    },
+    "EUR": {
+        "USD": 1.18,
+        "GBP": 0.88
+    },
+    "GBP": {
+        "USD": 1.33,
+        "EUR": 1.14
+    }
+};
+
     
     function appendToDisplay(value) {
     const display = document.getElementById('display');
@@ -45,3 +61,26 @@ function deleteFromHistory(expression, result) {
     history = history.filter(item => item.expression !== expression || item.result !== result);
 }
 
+
+
+function convertCurrency() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const fromCurrency = document.getElementById('from-currency').value;
+    const toCurrency = document.getElementById('to-currency').value;
+    const resultElement = document.getElementById('conversion-result');
+
+   
+    if (isNaN(amount) || amount <= 0) {
+        resultElement.innerHTML = 'Please enter a valid amount.';
+        return;
+    }
+
+    
+    if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
+        const rate = exchangeRates[fromCurrency][toCurrency];
+        const convertedAmount = (amount * rate).toFixed(2);
+        resultElement.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+    } else {
+        resultElement.innerHTML = 'Conversion rate not available for selected currencies.';
+    }
+}

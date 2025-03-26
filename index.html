@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="Calculator">
+    <div id="container">
+
+<div id="calculator">
 
    <input type="text" id="display" readonly> <br>
 
@@ -33,8 +35,15 @@
    <button onclick="appendToDisplay('.')" class="operator-btn">.</button>
 </div>
 
+
+
 </div>
 
+</div>
+<div id="history">
+    <h2>Calculation History</h2>
+    <ul id="history-list"></ul>
+</div>
 
     
     <script src="index.js"></script>

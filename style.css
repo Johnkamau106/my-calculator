@@ -9,20 +9,7 @@ body{
     color: rgb(251, 249, 249);
 }
 
-#Calculator{
-    background-color: #fbfcfd;
-    ;
-    ;
-    width: 44%;
-    border-radius: 10PX;
-    border-color: black;
-    max-width: 600PX;
-    overflow: hidden;
-    border: solid 1px black;
-
-    
-}
-    
+   
 #display{
     width: 92%;
     height: 20%;
@@ -31,7 +18,7 @@ body{
     align-items: center;
     padding: 20px;
     font-size: 40px;
-    text-align: left;
+    text-align: right;
 
 
     
@@ -71,4 +58,49 @@ button:active{
 }
 .operator-btn:active{
     background-color: #99cad6;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 190px;
+    width: 80%;
+    max-width: 1200px;
+
+}
+
+#calculator {
+    background-color: #fbfcfd;
+    width: 60%;
+    max-width: 600px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+#history {
+    width: 300px;                
+    margin-left: 20px;           
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;               
+    overflow-y: auto;
+}
+
+#history-list {
+    list-style-type: none;
+    padding: 0;
+}
+#history-list li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+#history-list button {
+    margin-left: 10px;
 }

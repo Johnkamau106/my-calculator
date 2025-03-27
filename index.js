@@ -1,19 +1,6 @@
 let history = [];
 
-const exchangeRates = {
-    "USD": {
-        "EUR": 0.85,
-        "GBP": 0.75
-    },
-    "EUR": {
-        "USD": 1.18,
-        "GBP": 0.88
-    },
-    "GBP": {
-        "USD": 1.33,
-        "EUR": 1.14
-    }
-};
+
 
     
     function appendToDisplay(value) {
@@ -63,7 +50,7 @@ function deleteFromHistory(expression, result) {
 
 
 
-function convertCurrency() {
+async function convertCurrency() {
     const amount = parseFloat(document.getElementById('amount').value);
     const fromCurrency = document.getElementById('from-currency').value;
     const toCurrency = document.getElementById('to-currency').value;
@@ -75,12 +62,28 @@ function convertCurrency() {
         return;
     }
 
-    
-    if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
-        const rate = exchangeRates[fromCurrency][toCurrency];
-        const convertedAmount = (amount * rate).toFixed(2);
-        resultElement.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-    } else {
-        resultElement.innerHTML = 'Conversion rate not available for selected currencies.';
+    try {
+        
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/6976e830576031a37cc84bd4/latest/${fromCurrency}`);
+        const data = await response.json();
+
+        
+        if (data.result === 'success') {
+            
+            const rate = data.conversion_rates[toCurrency];
+
+            
+            if (rate) {
+                const convertedAmount = (amount * rate).toFixed(2);
+                resultElement.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+            } else {
+                resultElement.innerHTML = 'Conversion rate not available for selected currencies.';
+            }
+        } else {
+            resultElement.innerHTML = 'Error fetching exchange rates. Please try again later.';
+        }
+    } catch (error) {
+        resultElement.innerHTML = 'Error fetching exchange rates. Please check your connection.';
+        console.error('Error:', error);
     }
 }

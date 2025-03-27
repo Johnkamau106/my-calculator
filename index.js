@@ -1,8 +1,6 @@
 let history = [];
 
 
-
-    
     function appendToDisplay(value) {
     const display = document.getElementById('display');
     if (value === 'AC') {

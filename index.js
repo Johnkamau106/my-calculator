@@ -61,14 +61,14 @@ async function convertCurrency() {
     }
 
     try {
-        // Fetch exchange rates from the new API
+        // Fetch exchange rates from the JSON file
         const response = await fetch('https://johnkamau106.github.io/calculator-api/currencies.json');
         const data = await response.json();
 
         // Check if the selected currencies exist in the data
-        if (data[fromCurrency] && data[toCurrency]) {
-            const fromRate = data[fromCurrency];
-            const toRate = data[toCurrency];
+        if (data[fromCurrency] && data[fromCurrency][toCurrency]) {
+            const fromRate = 1; // Base rate for the "from" currency
+            const toRate = data[fromCurrency][toCurrency]; // Get the specific conversion rate
 
             // Calculate the converted amount
             const convertedAmount = (amount * toRate / fromRate).toFixed(2);

@@ -71,7 +71,7 @@ function editHistoryItem(li, expression, result) {
         li.appendChild(createDeleteButton());
         li.appendChild(createEditButton());
 
-        // Update the history array
+        
         history = history.map(item => 
             item.expression === expression && item.result === result
                 ? { expression: newExpression, result: newResult }

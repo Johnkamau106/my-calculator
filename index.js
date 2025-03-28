@@ -67,7 +67,7 @@ function editHistoryItem(li, expression, result) {
         li.setAttribute('data-expression', newExpression);
         li.setAttribute('data-result', newResult);
 
-        // Re-add the buttons
+        
         li.appendChild(createDeleteButton());
         li.appendChild(createEditButton());
 

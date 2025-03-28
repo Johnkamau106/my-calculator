@@ -54,31 +54,27 @@ async function convertCurrency() {
     const toCurrency = document.getElementById('to-currency').value;
     const resultElement = document.getElementById('conversion-result');
 
-   
+    // Validate the input amount
     if (isNaN(amount) || amount <= 0) {
         resultElement.innerHTML = 'Please enter a valid amount.';
         return;
     }
 
     try {
-        
-        const response = await fetch(`https://v6.exchangerate-api.com/v6/6976e830576031a37cc84bd4/latest/${fromCurrency}`);
+        // Fetch exchange rates from the new API
+        const response = await fetch('https://johnkamau106.github.io/calculator-api/currencies.json');
         const data = await response.json();
 
-        
-        if (data.result === 'success') {
-            
-            const rate = data.conversion_rates[toCurrency];
+        // Check if the selected currencies exist in the data
+        if (data[fromCurrency] && data[toCurrency]) {
+            const fromRate = data[fromCurrency];
+            const toRate = data[toCurrency];
 
-            
-            if (rate) {
-                const convertedAmount = (amount * rate).toFixed(2);
-                resultElement.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-            } else {
-                resultElement.innerHTML = 'Conversion rate not available for selected currencies.';
-            }
+            // Calculate the converted amount
+            const convertedAmount = (amount * toRate / fromRate).toFixed(2);
+            resultElement.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
         } else {
-            resultElement.innerHTML = 'Error fetching exchange rates. Please try again later.';
+            resultElement.innerHTML = 'Conversion rate not available for selected currencies.';
         }
     } catch (error) {
         resultElement.innerHTML = 'Error fetching exchange rates. Please check your connection.';
